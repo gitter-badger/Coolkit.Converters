@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 using FluentAssertions;
 
@@ -17,6 +18,16 @@ namespace Coolkit.Converters.UnitTests
 
             // act && assert
             sut.Should().BeAssignableTo<IValueConverter>();
+        }
+
+        [Fact]
+        public void SutDerivesFromMarkupExtension()
+        {
+            // arrange
+            var sut = new BooleanToVisibilityConverter();
+
+            // act && assert
+            sut.Should().BeAssignableTo<MarkupExtension>();
         }
 
         [Fact]
@@ -80,6 +91,36 @@ namespace Coolkit.Converters.UnitTests
 
             //assert
             result.Should().Be(expectedResult);
+        }
+
+        [Fact]
+        public void ConvertBack_Always_ReturnsUnset()
+        {
+            // arrange
+            var input = string.Empty;
+            var expectedResult = DependencyProperty.UnsetValue;
+
+            var sut = new BooleanToVisibilityConverter();
+
+            // act
+            var result = sut.ConvertBack(input, null, null, null);
+
+            //assert
+            result.Should().Be(expectedResult);
+        }
+
+
+        [Fact]
+        public void ConverterAsMarkupExtension_ShouldReturnItself()
+        {
+            // arrange
+            var sut = new BooleanToVisibilityConverter();
+
+            // act
+            var result = sut.ProvideValue(null);
+
+            //assert
+            result.Should().BeSameAs(sut);
         }
     }
 }
