@@ -6,6 +6,8 @@ using FluentAssertions;
 
 using Xunit;
 
+using static System.Windows.Visibility;
+
 namespace Coolkit.Converters.UnitTests
 {
     public class BooleanToVisibilityConverterFacts
@@ -35,7 +37,7 @@ namespace Coolkit.Converters.UnitTests
         {
             // arrange
             var input = false;
-            var expectedResult = Visibility.Collapsed;
+            var expectedResult = Collapsed;
 
             var sut = new BooleanToVisibilityConverter();
 
@@ -51,7 +53,7 @@ namespace Coolkit.Converters.UnitTests
         {
             // arrange
             var input = true;
-            var expectedResult = Visibility.Visible;
+            var expectedResult = Visible;
 
             var sut = new BooleanToVisibilityConverter();
 

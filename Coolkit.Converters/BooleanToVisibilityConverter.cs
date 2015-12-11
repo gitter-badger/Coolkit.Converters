@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
+using static System.Windows.Visibility;
+
 namespace Coolkit.Converters
 {
     public class BooleanToVisibilityConverter : MarkupExtension, IValueConverter
@@ -14,17 +16,11 @@ namespace Coolkit.Converters
                 return DependencyProperty.UnsetValue;
 
             var castedValue = (bool)value;
-            return castedValue ? Visibility.Visible : Visibility.Collapsed;
+            return castedValue ? Visible : Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => DependencyProperty.UnsetValue;
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
     }
 }
