@@ -12,8 +12,14 @@ namespace Coolkit.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(!(value is bool))
+            if(targetType != typeof(Visibility))
+            {
                 return DependencyProperty.UnsetValue;
+            }
+            if(!(value is bool))
+            {
+                return DependencyProperty.UnsetValue;
+            }
 
             var castedValue = (bool)value;
             return castedValue ? Visible : Collapsed;

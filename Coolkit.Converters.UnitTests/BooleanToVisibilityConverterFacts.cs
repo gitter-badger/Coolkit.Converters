@@ -42,7 +42,7 @@ namespace Coolkit.Converters.UnitTests
             var sut = new BooleanToVisibilityConverter();
 
             // act
-            var result = sut.Convert(input, null, null, null);
+            var result = sut.Convert(input, typeof(Visibility), null, null);
 
             //assert
             result.Should().Be(expectedResult);
@@ -58,7 +58,7 @@ namespace Coolkit.Converters.UnitTests
             var sut = new BooleanToVisibilityConverter();
 
             // act
-            var result = sut.Convert(input, null, null, null);
+            var result = sut.Convert(input, typeof(Visibility), null, null);
 
             //assert
             result.Should().Be(expectedResult);
@@ -73,7 +73,7 @@ namespace Coolkit.Converters.UnitTests
             var sut = new BooleanToVisibilityConverter();
 
             // act
-            var result = sut.Convert(null, null, null, null);
+            var result = sut.Convert(null, typeof(Visibility), null, null);
 
             //assert
             result.Should().Be(expectedResult);
@@ -89,7 +89,24 @@ namespace Coolkit.Converters.UnitTests
             var sut = new BooleanToVisibilityConverter();
 
             // act
-            var result = sut.Convert(input, null, null, null);
+            var result = sut.Convert(input, typeof(Visibility), null, null);
+
+            //assert
+            result.Should().Be(expectedResult);
+        }
+
+        [Fact]
+        public void Convert_WithWrongTargetType_ShouldReturnUnset()
+        {
+            // arrange
+            var input = true;
+            var requestedTargetType = typeof(int);
+            var expectedResult = DependencyProperty.UnsetValue;
+
+            var sut = new BooleanToVisibilityConverter();
+
+            // act
+            var result = sut.Convert(input, requestedTargetType, null, null);
 
             //assert
             result.Should().Be(expectedResult);
